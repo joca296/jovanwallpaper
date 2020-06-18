@@ -42,6 +42,8 @@ $myGray : rgb(242,242,242);
     justify-content: center;
     flex-direction: column;
 
+    margin-bottom: 22.5px;
+
     #hours {
         span {
             font-size: 4.2rem;
@@ -53,5 +55,69 @@ $myGray : rgb(242,242,242);
             font-size: 1.32rem;
         }
         padding-bottom: 15px;
+    }
+}
+
+#weather {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    position: relative;
+}
+
+#refresh-weather {
+    position: absolute; 
+    top: 11.25px;
+    right: 11.25px;
+}
+
+#current {
+    display: flex;
+    align-items: center;
+
+    h1 {
+        margin: 0;
+    }
+}
+
+.weather-card {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.weather-card:nth-child(2) {
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+}
+
+.condition-2 {
+    height: 3rem;
+    text-align: center;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hi-lo-temp {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    p {
+        width: 50%;
+    }
+
+    p:nth-child(odd) {
+        text-align: left;
+        color: gray;
+    }
+
+    p:nth-child(even) {
+        text-align: right;
     }
 }
