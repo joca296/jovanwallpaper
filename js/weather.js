@@ -1,5 +1,5 @@
 const env = {
-    "accuWeatherApiKey" : "AIxSTTGmr5t4FWES6A1mUp2DiipzsH4Y"
+    "accuWeatherApiKey" : "5eDcugoouXgmJfzBs0IZ5TAy4TUog2OG"
 }
 
 function getFiveDayForecast () {
