@@ -6,7 +6,7 @@ function getFiveDayForecast () {
     let object;
     $.ajax({
         type: "get",
-        url: "http://dataservice.accuweather.com/forecasts/v1/daily/5day/298198",
+        url: "https://dataservice.accuweather.com/forecasts/v1/daily/5day/298198",
         async : false,
         data: {
             "details" : false,
@@ -28,7 +28,7 @@ function getCurrentConditions () {
     let object;
     $.ajax({
         type: "get",
-        url: "http://dataservice.accuweather.com/currentconditions/v1/298198",
+        url: "https://dataservice.accuweather.com/currentconditions/v1/298198",
         async : false,
         data: {
             "details" : false,
