@@ -1,0 +1,57 @@
+body {
+    background-color: lightblue;
+    background-size: cover;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+$myGray : rgb(242,242,242);
+
+.transparent-card {
+    border-radius: 10px;
+    background-color: rgba($color: $myGray, $alpha: 0.7);
+    padding: 25px;
+}
+
+#notes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#notes-list {
+    overflow: auto;
+    height: 400px;
+}
+
+.note {
+    margin-bottom: 15px;
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    #hours {
+        span {
+            font-size: 4.2rem;
+        }
+    }
+
+    #date {
+        span {
+            font-size: 1.32rem;
+        }
+        padding-bottom: 15px;
+    }
+}
