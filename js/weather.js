@@ -1,9 +1,9 @@
 const env = {
-    "accuWeatherApiKey" : "5eDcugoouXgmJfzBs0IZ5TAy4TUog2OG"
+    "accuWeatherApiKey" : "4Nag1SBt1HMQoXNrTPYmb775Z7XTsVdv"
 }
 
 function getLocation() {
-    let ipAddress;
+    let ipAddress = "";
     let userLocation = {
         "key" : "",
         "location" : "",
@@ -12,14 +12,10 @@ function getLocation() {
     
     $.ajax({
         type: "get",
-        url: "https://api.ipify.org/",
-        data: {
-            "format" : "json"
-        },
+        url: "https://www.cloudflare.com/cdn-cgi/trace",
         async : false,
-        dataType: "json",
         success: (response) => {
-            ipAddress = response.ip;
+            ipAddress = response.match("ip=(.*)\n")[1];
         },
         error: (error) => {
             console.log(error);
@@ -28,10 +24,9 @@ function getLocation() {
 
     $.ajax({
         type: "get",
-        url: "http://dataservice.accuweather.com/locations/v1/cities/ipaddress",
+        url: "https://dataservice.accuweather.com/locations/v1/cities/ipaddress",
         async : false,
         data: {
-            "details" : false,
             "q" : ipAddress,
             "apikey" : env.accuWeatherApiKey
         },
