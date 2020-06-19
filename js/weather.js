@@ -2,11 +2,58 @@ const env = {
     "accuWeatherApiKey" : "5eDcugoouXgmJfzBs0IZ5TAy4TUog2OG"
 }
 
-function getFiveDayForecast () {
+function getLocation() {
+    let ipAddress;
+    let userLocation = {
+        "key" : "",
+        "location" : "",
+        "region" : ""
+    };
+    
+    $.ajax({
+        type: "get",
+        url: "https://api.ipify.org/",
+        data: {
+            "format" : "json"
+        },
+        async : false,
+        dataType: "json",
+        success: (response) => {
+            ipAddress = response.ip;
+        },
+        error: (error) => {
+            console.log(error);
+        }
+    });
+
+    $.ajax({
+        type: "get",
+        url: "http://dataservice.accuweather.com/locations/v1/cities/ipaddress",
+        async : false,
+        data: {
+            "details" : false,
+            "q" : ipAddress,
+            "apikey" : env.accuWeatherApiKey
+        },
+        dataType: "json",
+        success: (response) => {
+            userLocation.key = response.Key;
+            userLocation.location = response.EnglishName;
+            userLocation.region = response.Country.EnglishName;
+        },
+        error: (error) => {
+            console.log(error);
+        }
+    });
+
+    return userLocation;
+}
+
+function getFiveDayForecast (location) {
     let object;
     $.ajax({
         type: "get",
-        url: "https://dataservice.accuweather.com/forecasts/v1/daily/5day/298198",
+        url: `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${location.key}`,
         async : false,
         data: {
             "details" : false,
@@ -24,11 +71,11 @@ function getFiveDayForecast () {
     return object;
 }
 
-function getCurrentConditions () {
+function getCurrentConditions (location) {
     let object;
     $.ajax({
         type: "get",
-        url: "https://dataservice.accuweather.com/currentconditions/v1/298198",
+        url: `https://dataservice.accuweather.com/currentconditions/v1/${location.key}`,
         async : false,
         data: {
             "details" : false,
@@ -46,8 +93,8 @@ function getCurrentConditions () {
     return object;
 }
 
-function displayCurrentConditions() {
-    let conditions = getCurrentConditions();
+function displayCurrentConditions(location) {
+    let conditions = getCurrentConditions(location);
 
     let mainElement = document.getElementById('current');
     mainElement.innerHTML = "";
@@ -70,8 +117,8 @@ function displayCurrentConditions() {
     mainElement.appendChild(condition);
 }
 
-function displayThreeDayForecast () {
-    let forecast = getFiveDayForecast().DailyForecasts;
+function displayThreeDayForecast (location) {
+    let forecast = getFiveDayForecast(location).DailyForecasts;
 
     let mainElement = document.getElementById('three-days');
     mainElement.innerHTML = "";
@@ -114,14 +161,18 @@ function displayThreeDayForecast () {
     }
 }
 
-function displayFullWeather() {
-    displayCurrentConditions();
-    displayThreeDayForecast();
+function displayFullWeather(userLocation) {
+    displayCurrentConditions(userLocation);
+    displayThreeDayForecast(userLocation);
+
+    document.getElementById("location-name").innerHTML = `${userLocation.location}, ${userLocation.region}`;
 }
 
-displayFullWeather();
+let userLocation = getLocation();
+
+displayFullWeather(userLocation);
 setInterval(() => {
-    displayFullWeather()
+    displayFullWeather(userLocation)
 }, 1000*60*60*4);
 
 document.getElementById('refresh-weather').addEventListener('click', () => {displayFullWeather()});
