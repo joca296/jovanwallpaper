@@ -98,9 +98,9 @@ function displayThreeDayForecast () {
         let p3 = document.createElement('p');
         let p4 = document.createElement('p');
         p1.innerHTML = "HI";
-        p2.innerHTML = `${forecast[0].Temperature.Maximum.Value}°C`;
+        p2.innerHTML = `${forecast[i].Temperature.Maximum.Value}°C`;
         p3.innerHTML = "LO";
-        p4.innerHTML = `${forecast[0].Temperature.Minimum.Value}°C`;
+        p4.innerHTML = `${forecast[i].Temperature.Minimum.Value}°C`;
         hiLoDiv.appendChild(p1);
         hiLoDiv.appendChild(p2);
         hiLoDiv.appendChild(p3);
