@@ -170,4 +170,7 @@ setInterval(() => {
     displayFullWeather(userLocation)
 }, 1000*60*60*4);
 
-document.getElementById('refresh-weather').addEventListener('click', () => {displayFullWeather(userLocation)});
+document.getElementById('refresh-weather').addEventListener('click', () => {
+    userLocation = getLocation();
+    displayFullWeather(userLocation);
+});
