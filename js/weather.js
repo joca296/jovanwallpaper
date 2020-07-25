@@ -163,7 +163,12 @@ function displayFullWeather(userLocation) {
     document.getElementById("location-name").innerHTML = `${userLocation.location}, ${userLocation.region}`;
 }
 
-let userLocation = getLocation();
+//let userLocation = getLocation();
+let userLocation = {
+    "key" : 298198,
+    "location" : "Belgrade",
+    "region" : "Serbia"
+}
 
 displayFullWeather(userLocation);
 setInterval(() => {
@@ -171,6 +176,6 @@ setInterval(() => {
 }, 1000*60*60*4);
 
 document.getElementById('refresh-weather').addEventListener('click', () => {
-    userLocation = getLocation();
+    //userLocation = getLocation();
     displayFullWeather(userLocation);
 });
